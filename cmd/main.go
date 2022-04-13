@@ -11,7 +11,7 @@ import (
 
 func main() {
 
-	db, err := db.InitDB("mysql", "", "go_articles")
+	db, err := db.InitDB("sql3485634", "Y48W3EjN9W", "sql3.freemysqlhosting.net", "3306", "sql3485634")
 	if err != nil {
 		log.Fatalf(err.Error())
 	}

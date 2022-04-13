@@ -3,12 +3,13 @@ package server
 import (
 	"context"
 	"net/http"
-	"os"
 	"time"
 )
 
 const (
 	RWTimeout = 10 * time.Second
+
+	port = "8000"
 )
 
 type Server struct {
@@ -18,7 +19,7 @@ type Server struct {
 func NewServer(handler http.Handler) *Server {
 	return &Server{
 		httpServer: &http.Server{
-			Addr:           ":" + os.Getenv("PORT"),
+			Addr:           ":" + port,
 			Handler:        handler,
 			ReadTimeout:    RWTimeout,
 			WriteTimeout:   RWTimeout,
