@@ -7,7 +7,6 @@ import (
 )
 
 const (
-	port      = "8080"
 	RWTimeout = 10 * time.Second
 )
 
