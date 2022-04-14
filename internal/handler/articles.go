@@ -9,19 +9,22 @@ import (
 )
 
 func (h *Handler) create(c *gin.Context) {
+	c.HTML(http.StatusOK, "article_create.html", gin.H{})
+}
+
+func (h *Handler) saveArticle(c *gin.Context) {
 	var article models.Article
 
-	if err := c.BindJSON(&article); err != nil {
-		log.Println(err.Error())
-		return
-	}
+	article.Author, _ = c.GetPostForm("author")
+	article.Title, _ = c.GetPostForm("title")
+	article.Anons, _ = c.GetPostForm("anons")
+	article.Text, _ = c.GetPostForm("text")
 
 	if err := h.services.Articles.Create(c.Request.Context(), article); err != nil {
 		log.Println(err.Error())
 		return
 	}
-
-	c.Redirect(http.StatusCreated, "/articles/getAll")
+	c.Redirect(http.StatusSeeOther, "/articles/getAll")
 }
 
 func (h *Handler) getAll(c *gin.Context) {
@@ -49,14 +52,19 @@ func (h *Handler) getByID(c *gin.Context) {
 		c.Redirect(http.StatusFound, "/articles/getAll")
 	}
 
-	c.JSON(http.StatusOK, article)
+	c.HTML(http.StatusOK, "article_show.html", gin.H{
+		"title":   article.Title,
+		"article": article,
+	})
 }
 
 func (h *Handler) delete(c *gin.Context) {
-	id := c.GetInt("id")
+	id, err := strconv.Atoi(c.Param("id"))
 
-	err := h.services.Articles.Delete(c.Request.Context(), id)
+	err = h.services.Articles.Delete(c.Request.Context(), id)
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
+
+	c.Redirect(http.StatusSeeOther, "/articles/getAll")
 }

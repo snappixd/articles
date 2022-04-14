@@ -23,10 +23,11 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	articles := router.Group("/articles")
 	{
-		articles.POST("/create", h.create)
+		articles.GET("/create", h.create)
+		articles.POST("/saveArticle", h.saveArticle)
 		articles.GET("/getAll", h.getAll)
 		articles.GET("/getByID/:id", h.getByID)
-		articles.DELETE("/delete/:id", h.delete)
+		articles.GET("/delete/:id", h.delete)
 	}
 
 	auth := router.Group("/auth")
