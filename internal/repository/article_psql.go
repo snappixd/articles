@@ -18,13 +18,13 @@ func NewArticlesRepo(db *sql.DB) *ArticlesRepo {
 }
 
 func (r *ArticlesRepo) Create(ctx context.Context, article models.Article) error {
-	_, err := r.db.Exec("INSERT INTO `articles` (`author`, `title`, `anons`, `text`) VALUES (?, ?, ?, ?)",
+	_, err := r.db.Exec("INSERT INTO `articles_2` (`author`, `title`, `anons`, `text`) VALUES (?, ?, ?, ?)",
 		article.Author, article.Title, article.Anons, article.Text)
 	return err
 }
 
 func (r *ArticlesRepo) GetAll(ctx context.Context) ([]models.Article, error) {
-	rows, err := r.db.Query("SELECT * FROM articles")
+	rows, err := r.db.Query("SELECT * FROM articles_2")
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ func (r *ArticlesRepo) GetAll(ctx context.Context) ([]models.Article, error) {
 func (r *ArticlesRepo) GetByID(ctx context.Context, id int) (models.Article, error) {
 	var article models.Article
 
-	err := r.db.QueryRow("SELECT id, author, title, anons, text FROM articles WHERE id=?", id).
+	err := r.db.QueryRow("SELECT id, author, title, anons, text FROM articles_2 WHERE id=?", id).
 		Scan(&article.ID, &article.Author, &article.Title, &article.Anons, &article.Text)
 	if err == sql.ErrNoRows {
 		return article, errors.New("No Article with id was found")
@@ -56,7 +56,7 @@ func (r *ArticlesRepo) GetByID(ctx context.Context, id int) (models.Article, err
 }
 
 func (r *ArticlesRepo) Delete(ctx context.Context, id int) error {
-	_, err := r.db.Exec("DELETE FROM articles WHERE id=?", id)
+	_, err := r.db.Exec("DELETE FROM articles_2 WHERE id=?", id)
 
 	return err
 }
