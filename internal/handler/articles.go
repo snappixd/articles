@@ -32,7 +32,9 @@ import (
 // @Router /articles/create [get]
 
 func (h *Handler) create(c *gin.Context) {
-	c.HTML(http.StatusOK, "article_create.html", gin.H{})
+	c.HTML(http.StatusOK, "article_create.html", gin.H{
+		"title": "Create",
+	})
 }
 
 func (h *Handler) saveArticle(c *gin.Context) {
