@@ -50,7 +50,7 @@ func (h *Handler) saveArticle(c *gin.Context) {
 	article.Title, _ = c.GetPostForm("title")
 	article.Anons, _ = c.GetPostForm("anons")
 	article.Text, _ = c.GetPostForm("text")
-	photo := c.GetPostForm("photo")
+	photo, _ := c.GetPostForm("photo")
 
 	fInfo, _ := photo.Stat()
 	var size int64 = fInfo.Size()
