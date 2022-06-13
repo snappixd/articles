@@ -49,7 +49,7 @@ func (h *Handler) saveArticle(c *gin.Context) {
 	article.Anons, _ = c.GetPostForm("anons")
 	article.Text, _ = c.GetPostForm("text")
 
-	if article.Author != "" || article.Title != "" || article.Anons != "" || article.Text != "" {
+	if article.Author == "" || article.Title == "" || article.Anons == "" || article.Text == "" {
 		c.Redirect(http.StatusSeeOther, "/articles/error")
 	} else {
 		if err := h.services.Articles.Create(c.Request.Context(), article); err != nil {
