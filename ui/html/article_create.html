@@ -57,6 +57,10 @@
             margin: auto;
         }
 
+        textarea {
+            height: 300px;
+        }
+
         @media (min-width: 768px) {
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
@@ -88,7 +92,7 @@
         <input maxlength='10' type="text" name="author" id="author" class="form-control" placeholder="Author:"><br>
         <input maxlength='20' type="text" name="title" id="title" class="form-control" placeholder="Title:"><br>
         <input maxlength='45' type="text" name="anons" id="anons" class="form-control" placeholder="Anons:"><br>
-        <textarea name="text" id="text" class="form-control" placeholder="Text:"></textarea><br>
+        <textarea maxlength='5000' name="text" id="text" class="form-control" placeholder="Text:"></textarea><br>
         <button class="btn btn-warning form-control" onclick="location.href = '/articles/getAll';">Create</button>
     </form>
 
