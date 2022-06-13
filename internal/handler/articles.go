@@ -53,8 +53,9 @@ func (h *Handler) saveArticle(c *gin.Context) {
 		c.Redirect(http.StatusSeeOther, "/articles/error")
 	} else {
 		if err := h.services.Articles.Create(c.Request.Context(), article); err != nil {
-		log.Println(err.Error())
-		return
+			log.Println(err.Error())
+			return
+		}
 	}
 }
 
