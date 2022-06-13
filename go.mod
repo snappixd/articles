@@ -1,3 +1,3 @@
-module articles
+module articles_psql
 
 go 1.18
