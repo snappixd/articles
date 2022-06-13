@@ -91,7 +91,7 @@ func (h *Handler) getByID(c *gin.Context) {
 func (h *Handler) delete(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
 
-	err = h.services.Articles.Delete(c.Request.Context(), id)
+	err := h.services.Articles.Delete(c.Request.Context(), id)
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
