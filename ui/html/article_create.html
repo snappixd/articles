@@ -86,7 +86,7 @@
 
     <form action="/articles/saveArticle" class="info" method="post">
         <input type="text" name="author" id="author" class="form-control" placeholder="Author:"><br>
-        <input type="text" name="title" id="title" class="form-control" placeholder="Title:"><br>
+        <input maxlength='20' type="text" name="title" id="title" class="form-control" placeholder="Title:"><br>
         <input type="text" name="anons" id="anons" class="form-control" placeholder="Anons:"><br>
         <textarea name="text" id="text" class="form-control" placeholder="Text:"></textarea><br>
         <button class="btn btn-warning form-control" onclick="location.href = '/articles/getAll';">Create</button>
