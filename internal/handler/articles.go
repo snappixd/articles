@@ -2,10 +2,11 @@ package handler
 
 import (
 	"articles_psql/internal/models"
-	"bufio"
-	"encoding/base64"
+	"fmt"
+	"io"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -50,17 +51,34 @@ func (h *Handler) saveArticle(c *gin.Context) {
 	article.Title, _ = c.GetPostForm("title")
 	article.Anons, _ = c.GetPostForm("anons")
 	article.Text, _ = c.GetPostForm("text")
-	photo, _ := c.GetPostForm("photo")
+	//photo, _ := c.GetPostForm("photo")
+	//photo, _, _ := c.Request.FormFile("upload")
 
-	fInfo, _ := photo.Stat()
-	var size int64 = fInfo.Size()
-	buf := make([]byte, size)
+	// fInfo, _ := photo.Stat()
+	// var size int64 = fInfo.Size()
+	// buf := make([]byte, size)
 
-	fReader := bufio.NewReader(photo)
-	fReader.Read(buf)
+	// fReader := bufio.NewReader(photo)
+	// fReader.Read(buf)
 
-	convertedPhoto := base64.StdEncoding.EncodeToString(buf)
-	article.Photo = convertedPhoto
+	// convertedPhoto := base64.StdEncoding.EncodeToString(buf)
+	// article.Photo = convertedPhoto
+
+	photo, header, _ := c.Request.FormFile("upload")
+	filename := header.Filename
+	fmt.Println(header.Filename)
+	out, err := os.Create("./ui/img/" + filename + ".png")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer out.Close()
+
+	_, err = io.Copy(out, photo)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	article.Photo = filename
 
 	if article.Author == "" || article.Title == "" || article.Anons == "" || article.Text == "" {
 		c.Redirect(http.StatusSeeOther, "/articles/error")
