@@ -64,7 +64,7 @@ func (h *Handler) saveArticle(c *gin.Context) {
 	// convertedPhoto := base64.StdEncoding.EncodeToString(buf)
 	// article.Photo = convertedPhoto
 
-	photo, header, _ := c.Request.FormFile("upload")
+	photo, header, _ := c.Request.FormFile("photo")
 	filename := header.Filename
 	fmt.Println(header.Filename)
 	out, err := os.Create("./ui/img/" + filename + ".png")
