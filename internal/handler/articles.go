@@ -37,6 +37,10 @@ func (h *Handler) create(c *gin.Context) {
 	})
 }
 
+func (h *Handler) error(c *gin.Context) {
+	c.HTML(http.StatusOK, "error.html", gin.H{})
+}
+
 func (h *Handler) saveArticle(c *gin.Context) {
 	var article models.Article
 
@@ -46,10 +50,11 @@ func (h *Handler) saveArticle(c *gin.Context) {
 	article.Text, _ = c.GetPostForm("text")
 
 	if err := h.services.Articles.Create(c.Request.Context(), article); err != nil {
-		log.Println(err.Error())
-		return
+		c.Redirect(http.StatusSeeOther, "/articles/error")
+	} else {
+		c.Redirect(http.StatusSeeOther, "/articles/getAll")
 	}
-	c.Redirect(http.StatusSeeOther, "/articles/getAll")
+
 }
 
 func (h *Handler) getAll(c *gin.Context) {
@@ -84,7 +89,7 @@ func (h *Handler) getByID(c *gin.Context) {
 }
 
 func (h *Handler) delete(c *gin.Context) {
-	id, err := strconv.Atoi(c.Param("id"))
+	id, _ := strconv.Atoi(c.Param("id"))
 
 	err = h.services.Articles.Delete(c.Request.Context(), id)
 	if err != nil {
