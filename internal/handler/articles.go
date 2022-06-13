@@ -8,6 +8,28 @@ import (
 	"strconv"
 )
 
+// @Summary Create Article
+// @Tags articles
+// @Description To Create Articles
+// @ID create-article
+// @Accept json
+// @Produce json
+// @Param input body models.Article.Author true models.Article.Title true models.Article.Anons true models.Article.Text  true
+// @Success 200
+// @Failure 400
+// @Router /articles/create [get]
+
+// @Summary Create article
+// @Tags articles
+// @Description create article pls
+// @ID create-article
+// @Accept  json
+// @Produce  json
+// @Param input body models.Article true "list info"
+// @Success 200
+// @Failure default
+// @Router /articles/create [get]
+
 func (h *Handler) create(c *gin.Context) {
 	c.HTML(http.StatusOK, "article_create.html", gin.H{})
 }
