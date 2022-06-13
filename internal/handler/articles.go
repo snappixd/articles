@@ -68,7 +68,7 @@ func (h *Handler) getAll(c *gin.Context) {
 
 	//c.JSON(http.StatusOK, articles)
 	c.HTML(http.StatusOK, "main.html", gin.H{
-		"title":    "Articles",
+		"title":    "Чудовий сайт",
 		"articles": articles,
 	})
 
