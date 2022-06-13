@@ -2,11 +2,8 @@ package handler
 
 import (
 	"articles_psql/internal/service"
-	"github.com/gin-gonic/gin"
 
-	_ "articles_psql/docs"
-	"github.com/swaggo/gin-swagger"
-	"github.com/swaggo/gin-swagger/swaggerFiles"
+	"github.com/gin-gonic/gin"
 )
 
 type Handler struct {
@@ -22,8 +19,6 @@ func NewHandler(services *service.Services) *Handler {
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
 	router.LoadHTMLGlob("ui/html/*.html")
-
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	router.GET("/", h.home)
 

@@ -2,10 +2,11 @@ package handler
 
 import (
 	"articles_psql/internal/models"
-	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
 )
 
 // @Summary Create Article
