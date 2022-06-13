@@ -56,6 +56,7 @@ func (h *Handler) saveArticle(c *gin.Context) {
 			log.Println(err.Error())
 			return
 		}
+		c.Redirect(http.StatusSeeOther, "/articles/getAll")
 	}
 }
 
