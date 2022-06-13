@@ -62,6 +62,10 @@
             width: 350px;
         }
 
+        .upload_image {
+            margin: 15px;;
+        }
+
         @media (min-width: 768px) {
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
@@ -96,7 +100,7 @@
         <textarea required  maxlength='5000' minlength="200" name="text" id="text" class="form-control" placeholder="Text:"></textarea><br>
         <button class="btn btn-warning form-control">Create</button>
 
-        <form accept="image/*" enctype="form-data" method="post">
+        <form class="upload_image" accept="image/*" enctype="form-data" method="post">
             <p><input type="file" name="photo">
             <input type="submit" value="Відправити"></p>
            </form>
