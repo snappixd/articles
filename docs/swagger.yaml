@@ -1,0 +1,9 @@
+basePath: /
+host: 127.0.0.1:8000
+info:
+  contact: {}
+  description: First try to make Swagger
+  title: Swagger Example API
+  version: "1.0"
+paths: {}
+swagger: "2.0"
