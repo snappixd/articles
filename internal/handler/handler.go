@@ -31,11 +31,5 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		articles.GET("/delete/:id", h.delete)
 	}
 
-	auth := router.Group("/auth")
-	{
-		auth.POST("/sign-up", h.sign_up)
-		auth.POST("/sign-in", h.sign_in)
-	}
-
 	return router
 }
