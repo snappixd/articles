@@ -49,12 +49,13 @@ func (h *Handler) saveArticle(c *gin.Context) {
 	article.Anons, _ = c.GetPostForm("anons")
 	article.Text, _ = c.GetPostForm("text")
 
-	if err := h.services.Articles.Create(c.Request.Context(), article); err != nil {
+	if article.Author == "" || article.Title == "" || article.Anons == "" || article.Text == "" {
 		c.Redirect(http.StatusSeeOther, "/articles/error")
 	} else {
-		c.Redirect(http.StatusSeeOther, "/articles/getAll")
+		if err := h.services.Articles.Create(c.Request.Context(), article); err != nil {
+		log.Println(err.Error())
+		return
 	}
-
 }
 
 func (h *Handler) getAll(c *gin.Context) {
