@@ -6,4 +6,5 @@ type Article struct {
 	Title  string `json:"title"`
 	Anons  string `json:"anons"`
 	Text   string `json:"text"`
+	Photo  string `json:"photo"`
 }

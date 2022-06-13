@@ -2,6 +2,8 @@ package handler
 
 import (
 	"articles_psql/internal/models"
+	"bufio"
+	"encoding/base64"
 	"log"
 	"net/http"
 	"strconv"
@@ -48,6 +50,17 @@ func (h *Handler) saveArticle(c *gin.Context) {
 	article.Title, _ = c.GetPostForm("title")
 	article.Anons, _ = c.GetPostForm("anons")
 	article.Text, _ = c.GetPostForm("text")
+	photo := c.GetPostForm("photo")
+
+	fInfo, _ := photo.Stat()
+	var size int64 = fInfo.Size()
+	buf := make([]byte, size)
+
+	fReader := bufio.NewReader(photo)
+	fReader.Read(buf)
+
+	convertedPhoto := base64.StdEncoding.EncodeToString(buf)
+	article.Photo = convertedPhoto
 
 	if article.Author == "" || article.Title == "" || article.Anons == "" || article.Text == "" {
 		c.Redirect(http.StatusSeeOther, "/articles/error")
