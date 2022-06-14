@@ -22,7 +22,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	router.LoadHTMLGlob("ui/html/*.html")
 
 	//router.Static("/assets", "./assets")
-	router.StaticFS("/ui/static", http.Dir("./ui/static"))
+	router.StaticFS("/ui/static", http.Dir("/ui/static"))
 	router.StaticFile("/favicon.ico", "./static/ui/favicon.ico")
 
 	router.GET("/", h.home)
