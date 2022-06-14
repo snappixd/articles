@@ -2,9 +2,13 @@ package handler
 
 import (
 	"articles_psql/internal/models"
+	"io/ioutil"
 	"log"
+	"math/rand"
 	"net/http"
 	"strconv"
+	"strings"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -48,6 +52,8 @@ func (h *Handler) saveArticle(c *gin.Context) {
 	article.Title, _ = c.GetPostForm("title")
 	article.Anons, _ = c.GetPostForm("anons")
 	article.Text, _ = c.GetPostForm("text")
+	article.Photo, _ = getRandomPhoto()
+	//log.Println(article.Photo)
 
 	if article.Author == "" || article.Title == "" || article.Anons == "" || article.Text == "" {
 		c.Redirect(http.StatusSeeOther, "/articles/error")
@@ -58,6 +64,30 @@ func (h *Handler) saveArticle(c *gin.Context) {
 		}
 		c.Redirect(http.StatusSeeOther, "/articles/getAll")
 	}
+}
+
+func getRandomPhoto() (string, error) {
+	photo := ""
+
+	file, err := ioutil.ReadFile("./photos.txt")
+	if err != nil {
+		log.Println(err.Error())
+		return "", err
+	}
+
+	rand.Seed(time.Now().UnixNano())
+	randNum := rand.Intn(6)
+
+	lines := strings.Split(string(file), "\n")
+	for i := 0; i < len(lines)-1; i++ {
+		if i == randNum {
+			photo = lines[i]
+		} else {
+			continue
+		}
+	}
+
+	return photo, nil
 }
 
 func (h *Handler) edit(c *gin.Context) {

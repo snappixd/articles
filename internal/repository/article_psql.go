@@ -18,8 +18,8 @@ func NewArticlesRepo(db *sql.DB) *ArticlesRepo {
 }
 
 func (r *ArticlesRepo) Create(ctx context.Context, article models.Article) error {
-	_, err := r.db.Exec("INSERT INTO `articles` (`author`, `title`, `anons`, `text`) VALUES (?, ?, ?, ?)",
-		article.Author, article.Title, article.Anons, article.Text)
+	_, err := r.db.Exec("INSERT INTO `articles` (`author`, `title`, `anons`, `text`, `photo`) VALUES (?, ?, ?, ?, ?)",
+		article.Author, article.Title, article.Anons, article.Text, article.Photo)
 	return err
 }
 
