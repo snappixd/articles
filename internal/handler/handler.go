@@ -22,7 +22,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	//router.StaticFile("/favicon.ico", "./ui/static/favicon.ico")
 
-	router.GET("/ui/static/favicon.ico", func(c *gin.Context) {
+	router.GET("/articles/ui/static/favicon.ico", func(c *gin.Context) {
 		c.File("./ui/static/favicon.ico")
 	})
 
