@@ -5,6 +5,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"log"
 )
 
 type ArticlesRepo struct {
@@ -43,6 +44,8 @@ func (r *ArticlesRepo) GetAll(ctx context.Context) ([]models.Article, error) {
 		if err := rows.Scan(&article.ID, &article.Author, &article.Title, &article.Anons, &article.Text, &article.Photo); err != nil {
 			return nil, err
 		}
+
+		log.Println(article.Photo)
 
 		articles = append(articles, article)
 	}
