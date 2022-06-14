@@ -9,6 +9,7 @@ import (
 type Articles interface {
 	Create(ctx context.Context, article models.Article) error
 	GetAll(ctx context.Context) ([]models.Article, error)
+	Edit(ctx context.Context, article models.Article) error
 	GetByID(ctx context.Context, id int) (models.Article, error)
 	Delete(ctx context.Context, id int) error
 }

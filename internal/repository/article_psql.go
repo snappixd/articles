@@ -23,6 +23,13 @@ func (r *ArticlesRepo) Create(ctx context.Context, article models.Article) error
 	return err
 }
 
+func (r *ArticlesRepo) Update(ctx context.Context, article models.Article) error {
+	_, err := r.db.Exec("UPDATE articles SET author=?, title=?, anons=?, text=? WHERE id=?",
+		article.Author, article.Title, article.Anons, article.Text, article.ID)
+
+	return err
+}
+
 func (r *ArticlesRepo) GetAll(ctx context.Context) ([]models.Article, error) {
 	rows, err := r.db.Query("SELECT * FROM articles")
 	if err != nil {

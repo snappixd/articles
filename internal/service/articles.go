@@ -20,6 +20,10 @@ func (s *ArticlesService) Create(ctx context.Context, article models.Article) er
 	return s.repo.Create(ctx, article)
 }
 
+func (s *ArticlesService) Edit(ctx context.Context, article models.Article) error {
+	return s.repo.Update(ctx, article)
+}
+
 func (s *ArticlesService) GetAll(ctx context.Context) ([]models.Article, error) {
 	return s.repo.GetAll(ctx)
 }
