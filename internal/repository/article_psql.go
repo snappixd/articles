@@ -40,7 +40,7 @@ func (r *ArticlesRepo) GetAll(ctx context.Context) ([]models.Article, error) {
 
 	for rows.Next() {
 		var article models.Article
-		if err := rows.Scan(&article.ID, &article.Author, &article.Title, &article.Anons, &article.Text); err != nil {
+		if err := rows.Scan(&article.ID, &article.Author, &article.Title, &article.Anons, &article.Text, &article.Photo); err != nil {
 			return nil, err
 		}
 
@@ -53,8 +53,8 @@ func (r *ArticlesRepo) GetAll(ctx context.Context) ([]models.Article, error) {
 func (r *ArticlesRepo) GetByID(ctx context.Context, id int) (models.Article, error) {
 	var article models.Article
 
-	err := r.db.QueryRow("SELECT id, author, title, anons, text FROM articles WHERE id=?", id).
-		Scan(&article.ID, &article.Author, &article.Title, &article.Anons, &article.Text)
+	err := r.db.QueryRow("SELECT id, author, title, anons, text, photo FROM articles WHERE id=?", id).
+		Scan(&article.ID, &article.Author, &article.Title, &article.Anons, &article.Text, &article.Photo)
 	if err == sql.ErrNoRows {
 		return article, errors.New("No Article with id was found")
 	}
