@@ -109,6 +109,7 @@ func (h *Handler) getAll(c *gin.Context) {
 	ip := c.ClientIP()
 
 	log.Print(ip)
+
 	//c.JSON(http.StatusOK, articles)
 	c.HTML(http.StatusOK, "main.html", gin.H{
 		"title":    "Чудовий сайт",
