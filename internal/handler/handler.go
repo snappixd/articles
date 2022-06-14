@@ -20,7 +20,11 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
 	router.LoadHTMLGlob("ui/html/*.html")
 
-	router.StaticFile("/favicon.ico", "./ui/static/favicon.ico")
+	//router.StaticFile("/favicon.ico", "./ui/static/favicon.ico")
+
+	router.GET("/ui/static/favicon.ico", func(c *gin.Context) {
+		c.File("./ui/static/favicon.ico")
+	})
 
 	router.GET("/", h.home)
 
