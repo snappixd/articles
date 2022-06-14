@@ -95,7 +95,7 @@
         </div>
     </section>
 
-    <form action="/articles/saveEditedArticle/{{ .id }}" class="info" method="post">
+    <form action="/articles/saveEditedArticle/{{ .article.ID }}" class="info" method="post">
         <input required  maxlength='10' minlength="4" type="text" name="author" id="author" class="form-control" placeholder="Author:" value={{ .article.Author }}> <br>
         <input required  maxlength='20' minlength="10" type="text" name="title" id="title" class="form-control" placeholder="Title:" value={{ .article.Title }}><br>
         <input required  maxlength='40' minlength="15" type="text" name="anons" id="anons" class="form-control" placeholder="Anons:" value={{ .article.Anons }}><br>
