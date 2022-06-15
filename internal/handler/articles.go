@@ -76,7 +76,7 @@ func getRandomPhoto() (string, error) {
 	}
 
 	rand.Seed(time.Now().UnixNano())
-	randNum := rand.Intn(6)
+	randNum := rand.Intn(7)
 
 	lines := strings.Split(string(file), "\n")
 	for i := 0; i < len(lines)-1; i++ {
